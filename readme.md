@@ -33,6 +33,7 @@ pip install -r requirements.txt
 ## Usage
 
 1. Create a CSV file with target system details:
+
 ```csv
 IP address,username,password,is connected succeed,is file deleted
 192.168.1.100,admin,password,,
@@ -40,6 +41,7 @@ IP address,username,password,is connected succeed,is file deleted
 ```
 
 2. Update FTP server settings in `config.py` (not included in repo):
+
 ```python
 FTP_HOST = "your.ftp.server"
 FTP_USER = "username"
@@ -47,6 +49,7 @@ FTP_PASS = "password"
 ```
 
 3. Run the collector:
+
 ```bash
 python fleet_metrics.py
 ```
@@ -65,6 +68,7 @@ Windows-Fleet-Metrics-Collector/
 ## Configuration
 
 The tool can be configured through the following parameters:
+
 - Monitoring duration (default: 3 hours)
 - Sampling interval (default: 10 minutes)
 - Maximum concurrent connections (default: 5)
@@ -73,7 +77,9 @@ The tool can be configured through the following parameters:
 ## Output
 
 For each monitored system, the tool generates:
+
 1. A CSV file containing:
+
    - Timestamp
    - CPU usage
    - Memory usage
@@ -95,6 +101,7 @@ For each monitored system, the tool generates:
 ## Error Handling
 
 The tool includes comprehensive error handling for:
+
 - Connection failures
 - Network interruptions
 - Insufficient permissions
@@ -111,10 +118,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Author
 
-Your Name
+David E
 
 ## Acknowledgments
 
 - PsExec for Windows remote execution
 - Python community for excellent libraries
-
