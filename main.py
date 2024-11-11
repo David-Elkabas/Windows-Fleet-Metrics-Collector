@@ -6,7 +6,7 @@ from datetime import datetime
 import logging
 import psutil
 import ftplib
-from psexec.client import Client
+from pypsexec.client import Client
 import socket
 import pandas as pd
 from typing import Dict, List, Optional
@@ -23,7 +23,7 @@ logging.basicConfig(
 )
 
 class SystemMonitor:
-    def _init_(self, ip: str, username: str, password: str, monitoring_duration: int = 10800):
+    def __init__(self, ip: str, username: str, password: str, monitoring_duration: int = 10800):
         """
         Initialize the system monitor
 
@@ -41,6 +41,10 @@ class SystemMonitor:
         self.sampling_interval = 600  # 10 minutes in seconds
         self.data_queue = queue.Queue()
         self.stop_flag = threading.Event()
+
+    def __str__(self):
+        """Return a string representation of the SystemMonitor object"""
+        return f"SystemMonitor(ip='{self.ip}', username='{self.username}', password='{self.password}', monitoring_duration={self.monitoring_duration}, sampling_interval={self.sampling_interval})"
 
     def connect_to_machine(self) -> bool:
         """Establish connection to remote machine using psexec"""
@@ -132,8 +136,13 @@ def process_machines(input_csv: str, ftp_host: str):
         df = pd.read_csv(input_csv)
 
         for index, row in df.iterrows():
-            monitor = SystemMonitor(row['IP'], row['username'], row['password'])
-
+            # print(row['IP'], row['username'], row['password'])
+            monitor = SystemMonitor(
+                row['IP'],
+                row['username'],
+                row['password']
+            )
+            print(monitor)
             # Try to connect
             connection_success = monitor.connect_to_machine()
             df.at[index, 'is_connected_succeed'] = connection_success
